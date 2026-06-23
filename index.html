@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>就労継続支援B型 | START</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --primary: #4A90A4;
+      --primary-dark: #357A8C;
+      --accent: #F5A623;
+      --text: #333;
+      --text-light: #666;
+      --bg: #F8FBFC;
+      --white: #fff;
+    }
+
+    body {
+      font-family: 'Hiragino Kaku Gothic Pro', 'Meiryo', sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.7;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--white);
+      box-shadow: 0 2px 12px rgba(0,0,0,.08);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.1rem;
+    }
+
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      margin-left: 28px;
+      font-size: .95rem;
+      transition: color .2s;
+    }
+
+    nav a:hover { color: var(--primary); }
+
+    nav a.cta {
+      background: var(--primary);
+      color: white;
+      padding: 8px 20px;
+      border-radius: 24px;
+      font-weight: 600;
+    }
+
+    nav a.cta:hover { background: var(--primary-dark); }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #4A90A4 0%, #357A8C 50%, #2A6070 100%);
+      color: white;
+      padding: 100px 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 320px; height: 320px;
+      background: rgba(255,255,255,.07);
+      border-radius: 50%;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: -40px;
+      width: 240px; height: 240px;
+      background: rgba(255,255,255,.05);
+      border-radius: 50%;
+    }
+
+    .hero-content { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,.2);
+      border: 1px solid rgba(255,255,255,.4);
+      border-radius: 20px;
+      padding: 4px 16px;
+      font-size: .85rem;
+      margin-bottom: 20px;
+      letter-spacing: .05em;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      font-weight: 800;
+      line-height: 1.3;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      opacity: .9;
+      margin-bottom: 36px;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 32px;
+      border-radius: 32px;
+      font-size: 1rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform .2s, box-shadow .2s;
+      cursor: pointer;
+    }
+
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.18); }
+
+    .btn-white { background: white; color: var(--primary); }
+    .btn-outline { background: transparent; color: white; border: 2px solid white; }
+
+    /* ── SECTION ── */
+    section { padding: 80px 24px; }
+
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+
+    .section-label {
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .section-lead {
+      color: var(--text-light);
+      max-width: 560px;
+      margin-bottom: 52px;
+    }
+
+    /* ── ABOUT ── */
+    .about { background: white; }
+
+    .about-grid {
+      display: block;
+      max-width: 720px;
+    }
+
+    .about-visual {
+      background: linear-gradient(135deg, #E8F4F8 0%, #C8E6F0 100%);
+      border-radius: 20px;
+      height: 340px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+    }
+
+    .about-list { list-style: none; margin-top: 24px; }
+
+    .about-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .about-list li:last-child { border-bottom: none; }
+
+    .check {
+      width: 22px; height: 22px;
+      background: var(--primary);
+      border-radius: 50%;
+      color: white;
+      font-size: .75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* ── SERVICES ── */
+    .services { background: var(--bg); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .service-card {
+      background: white;
+      border-radius: 16px;
+      padding: 32px 28px;
+      box-shadow: 0 2px 16px rgba(0,0,0,.06);
+      transition: transform .25s, box-shadow .25s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(74,144,164,.15);
+    }
+
+    .service-icon {
+      font-size: 2.4rem;
+      margin-bottom: 16px;
+    }
+
+    .service-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
+    .service-card p { font-size: .92rem; color: var(--text-light); }
+
+    /* ── FLOW ── */
+    .flow { background: white; }
+
+    .flow-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 0;
+      position: relative;
+    }
+
+    .flow-step {
+      text-align: center;
+      padding: 28px 16px;
+      position: relative;
+    }
+
+    .flow-step:not(:last-child)::after {
+      content: '→';
+      position: absolute;
+      right: -10px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.4rem;
+      color: var(--primary);
+      opacity: .5;
+    }
+
+    .step-num {
+      width: 48px; height: 48px;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      font-size: 1.1rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 14px;
+    }
+
+    .flow-step h4 { font-size: .95rem; font-weight: 700; margin-bottom: 6px; }
+    .flow-step p { font-size: .83rem; color: var(--text-light); }
+
+    /* ── FAQ ── */
+    .faq { background: var(--bg); }
+
+    .faq-list { max-width: 760px; margin: 0 auto; }
+
+    .faq-item {
+      background: white;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,.04);
+    }
+
+    .faq-q {
+      padding: 20px 24px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      user-select: none;
+    }
+
+    .faq-q::before {
+      content: 'Q';
+      background: var(--accent);
+      color: white;
+      width: 26px; height: 26px;
+      border-radius: 6px;
+      font-size: .85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .faq-q .arrow {
+      margin-left: auto;
+      font-size: .9rem;
+      color: var(--primary);
+      transition: transform .2s;
+    }
+
+    .faq-item.open .arrow { transform: rotate(180deg); }
+
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .3s ease, padding .3s;
+      padding: 0 24px 0 62px;
+      color: var(--text-light);
+      font-size: .93rem;
+    }
+
+    .faq-item.open .faq-a {
+      max-height: 200px;
+      padding: 0 24px 20px 62px;
+    }
+
+    /* ── CONTACT ── */
+    .contact {
+      background: linear-gradient(135deg, #4A90A4, #2A6070);
+      color: white;
+      text-align: center;
+    }
+
+    .contact .section-title { color: white; }
+    .contact p { opacity: .85; margin-bottom: 36px; }
+
+    .contact-cards {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+
+    .contact-card {
+      background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.3);
+      border-radius: 16px;
+      padding: 24px 32px;
+      min-width: 200px;
+    }
+
+    .contact-card .icon { font-size: 1.8rem; margin-bottom: 8px; }
+    .contact-card h4 { font-size: .85rem; opacity: .8; margin-bottom: 4px; }
+    .contact-card p { font-size: 1.1rem; font-weight: 700; margin-bottom: 0; opacity: 1; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #1A2F38;
+      color: rgba(255,255,255,.6);
+      text-align: center;
+      padding: 32px 24px;
+      font-size: .85rem;
+    }
+
+    footer strong { color: rgba(255,255,255,.9); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 680px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .about-visual { height: 200px; font-size: 3rem; }
+      nav a:not(.cta) { display: none; }
+      .flow-step:not(:last-child)::after { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="#" class="logo">
+      <div class="logo-icon">🚀</div>
+      START
+    </a>
+    <nav>
+      <a href="#about">施設について</a>
+      <a href="#services">活動内容</a>
+      <a href="#flow">利用の流れ</a>
+      <a href="#contact" class="cta">お問い合わせ</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">就労継続支援B型</div>
+    <h1>あなたのペースで、<br>はたらく喜びを見つけよう</h1>
+    <p>障害や体調に不安がある方が、自分らしいペースで仕事・生活・社会参加を楽しめる場所をご提供します。</p>
+    <div class="hero-btns">
+      <a href="#flow" class="btn btn-white">利用の流れを見る</a>
+      <a href="#contact" class="btn btn-outline">無料見学を申し込む</a>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div>
+        <div class="section-label">About Us</div>
+        <h2 class="section-title">「START」について</h2>
+        <p style="color:#666;">精神・身体・知的などさまざまな障害をお持ちの方が、のびのびと働き、社会とつながることができる就労継続支援B型事業所です。大阪府豊中市にて運営しています。</p>
+        <ul class="about-list">
+          <li><span class="check">✓</span><span>雇用契約なしで働ける安心の環境</span></li>
+          <li><span class="check">✓</span><span>工賃 時給 <strong>200〜700円（平均500円）</strong></span></li>
+          <li><span class="check">✓</span><span>作業時間 10:00〜15:00（休憩1時間）</span></li>
+          <li><span class="check">✓</span><span>専門スタッフが一人ひとりに寄り添いサポート</span></li>
+          <li><span class="check">✓</span><span>生活支援・就労移行へのステップアップも対応</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-inner">
+    <div class="section-label">Activities</div>
+    <h2 class="section-title">活動・作業内容</h2>
+    <p class="section-lead">多様な作業から、自分に合ったものを選べます。新しいスキルに挑戦することもできます。</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">👕</div>
+        <h3>オリジナルグッズ制作</h3>
+        <p>Tシャツ・マグカップ・ステッカーなど、オリジナルデザインのグッズを制作します。</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">💅</div>
+        <h3>ネイルチップ作成</h3>
+        <p>個性豊かなネイルチップを丁寧に手作り。繊細な作業が得意な方にぴったりです。</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">✨</div>
+        <h3>レジンキーホルダー作成</h3>
+        <p>レジンを使ったアクセサリー・キーホルダー制作。ものづくりの楽しさを体験できます。</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🎨</div>
+        <h3>イラストデザイン</h3>
+        <p>デジタル・アナログを問わず、イラスト制作やデザイン作業を行います。</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🖥️</div>
+        <h3>Web管理</h3>
+        <p>ウェブサイトの更新・管理業務。PCスキルを活かしながら実務経験を積めます。</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📦</div>
+        <h3>軽作業・梱包</h3>
+        <p>商品の仕分け・梱包など、コツコツと取り組める軽作業も対応しています。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FLOW -->
+<section class="flow" id="flow">
+  <div class="section-inner">
+    <div class="section-label">How to Start</div>
+    <h2 class="section-title">利用開始までの流れ</h2>
+    <p class="section-lead">ご相談から通所開始まで、スタッフが丁寧にサポートします。</p>
+    <div class="flow-steps">
+      <div class="flow-step">
+        <div class="step-num">1</div>
+        <h4>お問い合わせ・見学</h4>
+        <p>電話・メールでお気軽にご相談ください。無料見学も歓迎です。</p>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">2</div>
+        <h4>体験利用</h4>
+        <p>実際の作業を数日間体験。雰囲気を確かめてから決めていただけます。</p>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">3</div>
+        <h4>受給者証の申請</h4>
+        <p>お住まいの市区町村に障害福祉サービス受給者証を申請します。</p>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">4</div>
+        <h4>契約・通所開始</h4>
+        <p>ご本人のペースに合わせた個別支援計画を立て、通所をスタートします。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="section-inner" style="text-align:center;">
+    <div class="section-label">FAQ</div>
+    <h2 class="section-title">よくあるご質問</h2>
+    <p class="section-lead" style="margin:0 auto 40px;">初めての方からよく寄せられるご質問をまとめました。</p>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">精神障害がありますが利用できますか？<span class="arrow">▼</span></div>
+        <div class="faq-a">はい、精神・身体・知的・発達障害など幅広い障害のある方がご利用いただけます。まずはお気軽にご相談ください。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">費用はかかりますか？<span class="arrow">▼</span></div>
+        <div class="faq-a">世帯収入に応じた自己負担（1割）がありますが、多くの方は無料でご利用いただけます。詳しくはご相談ください。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">週に何日通わなければなりませんか？<span class="arrow">▼</span></div>
+        <div class="faq-a">週1日・1時間からOKです。体調に合わせて無理なく通所ペースを調整できます。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">受給者証がまだない場合はどうすればいいですか？<span class="arrow">▼</span></div>
+        <div class="faq-a">申請方法をスタッフが丁寧にご説明します。必要に応じて申請の同行支援も行っています。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="section-inner">
+    <h2 class="section-title">まずはお気軽にご相談ください</h2>
+    <p>見学・体験は無料です。ご不明な点はお電話・メールでもお答えします。</p>
+    <div class="contact-cards">
+      <div class="contact-card">
+        <div class="icon">📞</div>
+        <h4>電話</h4>
+        <p>06-6868-9478</p>
+      </div>
+      <div class="contact-card">
+        <div class="icon">📠</div>
+        <h4>FAX</h4>
+        <p>06-6868-9479</p>
+      </div>
+      <div class="contact-card">
+        <div class="icon">🕘</div>
+        <h4>受付時間</h4>
+        <p>9:30〜17:30</p>
+      </div>
+      <div class="contact-card">
+        <div class="icon">📍</div>
+        <h4>所在地</h4>
+        <p>大阪府豊中市岡上の町2-5-5<br>豊中グランドハイツ107</p>
+      </div>
+    </div>
+    <a href="mailto:info@chillstart.com" class="btn btn-white">メールで問い合わせる</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <strong>就労継続支援B型事業所 START</strong><br>
+  大阪府豊中市岡上の町2-5-5 豊中グランドハイツ107 ／ TEL: 06-6868-9478 ／ FAX: 06-6868-9479<br>
+  <a href="mailto:info@chillstart.com" style="color:rgba(255,255,255,.6);">info@chillstart.com</a><br><br>
+  &copy; 2026 就労継続支援B型事業所 START. All rights reserved.
+</footer>
+
+<script>
+  // FAQ アコーディオン
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  // スムーズスクロール
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
