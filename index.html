@@ -491,7 +491,7 @@
     </div>
 
     <div class="form-wrap">
-      <form action="https://formspree.io/f/mkolrwba" method="POST">
+      <form id="contact-form" action="https://formspree.io/f/mkolrwba" method="POST">
         <div class="form-row">
           <label>お名前 <span style="color:var(--primary)">*</span></label>
           <input type="text" name="name" placeholder="山田 太郎" required>
@@ -557,5 +557,5 @@
     });
   }
 </script>
-</body>
+<script>document.addEventListener('DOMContentLoaded',function(){var form=document.getElementById('contact-form');if(!form)return;form.addEventListener('submit',function(e){e.preventDefault();var submitted=false;var doSubmit=function(){if(submitted)return;submitted=true;HTMLFormElement.prototype.submit.call(form);};gtag('event','conversion',{'send_to':'AW-18273680751/XjIaCNv9pM0cEO_6yIlE','event_callback':doSubmit});setTimeout(doSubmit,1000);});});</script></body>
 </html>
